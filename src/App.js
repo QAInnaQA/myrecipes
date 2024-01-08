@@ -9,9 +9,13 @@ function App() {
   const [myRecipes, setMyRecipes] = useState([]);
   const [wordSubmitted, setWordSubmitted] = useState("avocado");
 
+  const APP_ENDPOINT = 'https://api.edamam.com/api/recipes/v2';
+  const APP_ID = '8ab7a4c3';
+  const APP_KEY = 'f14bb474657c53b972835d902e6c962a'
+
   useEffect(() => {
     const getRecipe = async () => {
-      const response = await fetch('https://api.edamam.com/api/recipes/v2?type=public&q=avocado&app_id=8ab7a4c3&app_key=f14bb474657c53b972835d902e6c962a');
+      const response = await fetch(`${APP_ENDPOINT}?type=public&q=${wordSubmitted}&app_id=${APP_ID}&app_key=${APP_KEY}`);
       const data = await response.json();
       setMyRecipes(data.hits);
     }
@@ -24,7 +28,7 @@ function App() {
   }
 
   const finalSearch = (e) => {
-    e.preventDefaut()
+    e.preventDefault()
     setWordSubmitted(mySearch)
   }
 
